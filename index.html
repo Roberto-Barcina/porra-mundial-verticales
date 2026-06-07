@@ -1,58 +1,164 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Clasificación Porra Mundial</title>
+<title>Clasificación Porra</title>
+
 <style>
-    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
-    h1 { text-align: center; }
-    table { width: 100%; border-collapse: collapse; background: white; }
-    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
-    th { background: #333; color: white; }
-    tr:nth-child(even) { background: #f9f9f9; }
-    .pos { font-weight: bold; }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+        margin: 0;
+        background: #222;
+        color: white;
+    }
+
+    /* --- CLASIFICACIÓN --- */
+    .clasificacion {
+        max-width: 800px;
+        margin: 30px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        font-size: 18px;
+    }
+
+    .item:first-child {
+        border-top: 1px solid #ddd;
+    }
+
+    /* Oro, plata, bronce */
+    .top1 { background: #ffe680; font-weight: bold; }
+    .top2 { background: #e0e0e0; font-weight: bold; }
+    .top3 { background: #f7c59f; font-weight: bold; }
+
+    /* --- PARTICIPANTES DETALLADOS --- */
+    .participante {
+        max-width: 900px;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .participante h2 {
+        margin-top: 0;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .box {
+        background: #fafafa;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+    }
+
+    .titulo {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #444;
+    }
 </style>
 </head>
+
 <body>
 
-<h1>Clasificación</h1>
+<h1>Clasificación General</h1>
 
-<table id="tabla">
-    <thead>
-        <tr>
-            <th>Posición</th>
-            <th>Participante</th>
-            <th>Puntos</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+<div class="clasificacion" id="clasificacion"></div>
+
+<h1>Participantes</h1>
+
+<div id="participantes"></div>
 
 <script>
 fetch("https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9QdREFjDLo-hPR1e1rYia2EKen1aaJl_mJvJA/exec")
   .then(r => r.json())
   .then(data => {
-      const participantes = data.participantes;
 
-      // Ordenar por TotalPuntos de mayor a menor
-      participantes.sort((a, b) => b.TotalPuntos - a.TotalPuntos);
+      /* -------------------------
+         CLASIFICACIÓN GENERAL
+      --------------------------*/
+      const lista = data.participantes;
+      lista.sort((a, b) => b.TotalPuntos - a.TotalPuntos);
 
-      const tbody = document.querySelector("#tabla tbody");
-      tbody.innerHTML = "";
+      const clasif = document.getElementById("clasificacion");
 
-      participantes.forEach((p, i) => {
-          const fila = `
-              <tr>
-                  <td class="pos">${i + 1}</td>
-                  <td>${p.Participante}</td>
-                  <td>${p.TotalPuntos}</td>
-              </tr>
+      lista.forEach((p, i) => {
+          let clase = "";
+          if (i === 0) clase = "top1";
+          if (i === 1) clase = "top2";
+          if (i === 2) clase = "top3";
+
+          clasif.innerHTML += `
+              <div class="item ${clase}">
+                  <div>${i + 1}. ${p.Participante}</div>
+                  <div><strong>${p.TotalPuntos}</strong> pts</div>
+              </div>
           `;
-          tbody.innerHTML += fila;
       });
+
+      /* -------------------------
+         PARTICIPANTES DETALLADOS
+      --------------------------*/
+      const cont = document.getElementById("participantes");
+
+      lista.forEach(p => {
+          cont.innerHTML += `
+              <div class="participante">
+                  <h2>${p.Participante} — ${p.TotalPuntos} puntos</h2>
+
+                  <div class="grid">
+                      <div class="box">
+                          <div class="titulo">Equipos</div>
+                          ${p["Equipo 1"]}<br>
+                          ${p["Equipo 2"]}<br>
+                          ${p["Equipo 3"]}<br>
+                          ${p["Equipo 4"]}<br>
+                          ${p["Equipo 5"]}<br>
+                      </div>
+
+                      <div class="box">
+                          <div class="titulo">Jugadores</div>
+                          ${p["Jugador 1"]}<br>
+                          ${p["Jugador 2"]}<br>
+                          ${p["Jugador 3"]}<br>
+                          ${p["Jugador 4"]}<br>
+                          ${p["Jugador 5"]}<br>
+                      </div>
+                  </div>
+              </div>
+          `;
+      });
+
   });
 </script>
 
 </body>
 </html>
-
