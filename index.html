@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Clasificación Porra Mundial</title>
+<style>
+    body { font-family: Arial; background: #f5f5f5; margin: 0; padding: 20px; }
+    h1 { text-align: center; }
+    .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 8px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #222; color: white; }
+</style>
+</head>
+<body>
+
+<h1>Clasificación Porra Mundial</h1>
+
+<div class="section">
+    <h2>Participantes</h2>
+    <table id="tabla-participantes"></table>
+</div>
+
+<div class="section">
+    <h2>Equipos</h2>
+    <table id="tabla-equipos"></table>
+</div>
+
+<div class="section">
+    <h2>Jugadores</h2>
+    <table id="tabla-jugadores"></table>
+</div>
+
+<script>
+fetch("datos.json")
+    .then(r => r.json())
+    .then(data => {
+        cargarTabla("tabla-participantes",
+            ["id","nombre","equipos","jugadores","puntos_equipos","puntos_jugadores","total"],
+            data.participantes
+        );
+
+        cargarTabla("tabla-equipos",
+            ["equipo","victorias","empates","fase16","fase8","fase4","fase2","final","campeon","puntos"],
+            data.equipos
+        );
+
+        cargarTabla("tabla-jugadores",
+            ["jugador","seleccion","goles","puntos"],
+            data.jugadores
+        );
+    });
+
+function cargarTabla(id, columnas, datos) {
+    const tabla = document.getElementById(id);
+    let html = "<tr>" + columnas.map(c => `<th>${c}</th>`).join("") + "</tr>";
+    datos.forEach(fila => {
+        html += "<tr>" + columnas.map(c => {
+            let valor = fila[c];
+            if (Array.isArray(valor)) valor = valor.join(", ");
+            return `<td>${valor}</td>`;
+        }).join("") + "</tr>";
+    });
+    tabla.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
