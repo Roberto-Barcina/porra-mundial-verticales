@@ -1,99 +1,215 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Clasificación Porra</title>
+<title>Porra del Mundial – Verticales</title>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #f2f2f2;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: url('https://i.imgur.com/8YqGk5y.jpeg') center/cover fixed no-repeat;
         margin: 0;
         padding: 0;
+        color: #fff;
     }
 
-    h1 {
+    /* CABECERA */
+    header {
         text-align: center;
-        padding: 20px;
-        margin: 0;
-        background: #222;
-        color: white;
+        padding: 50px 20px;
+        background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,40,80,0.8));
+        border-bottom: 5px solid gold;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        position: relative;
     }
 
-    /* --- CLASIFICACIÓN --- */
+    header::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: url('https://i.imgur.com/2YQzF3G.png') repeat-x;
+        opacity: 0.9;
+    }
+
+    header h1 {
+        font-size: 48px;
+        margin: 0;
+        font-weight: 900;
+        text-shadow: 0 0 15px #000;
+        letter-spacing: 2px;
+    }
+
+    header h2 {
+        margin-top: 10px;
+        font-size: 22px;
+        opacity: 0.9;
+        text-shadow: 0 0 8px #000;
+    }
+
+    /* BANDERAS */
+    .flags {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        animation: wave 3s infinite ease-in-out;
+    }
+
+    .flags img {
+        width: 45px;
+        height: 30px;
+        border-radius: 4px;
+        box-shadow: 0 0 10px #000;
+    }
+
+    @keyframes wave {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* CLASIFICACIÓN */
     .clasificacion {
-        max-width: 800px;
-        margin: 30px auto;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 900px;
+        margin: 40px auto;
+        background: rgba(0,0,0,0.55);
+        padding: 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .titulo-seccion {
+        font-size: 30px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+        color: gold;
+        text-shadow: 0 0 10px #000;
     }
 
     .item {
         display: flex;
         justify-content: space-between;
-        padding: 12px;
-        border-bottom: 1px solid #ddd;
-        font-size: 18px;
+        padding: 15px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        font-size: 22px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(5px);
+        transition: transform 0.2s;
     }
 
-    .item:first-child {
-        border-top: 1px solid #ddd;
+    .item:hover {
+        transform: scale(1.03);
     }
 
-    /* Oro, plata, bronce */
-    .top1 { background: #ffe680; font-weight: bold; }
-    .top2 { background: #e0e0e0; font-weight: bold; }
-    .top3 { background: #f7c59f; font-weight: bold; }
+    /* PODIO */
+    .top1 {
+        background: linear-gradient(135deg, #ffd700, #fff3a0);
+        color: #000;
+        font-weight: bold;
+        box-shadow: 0 0 20px #ffd700;
+        animation: shine 2s infinite linear;
+    }
 
-    /* --- PARTICIPANTES DETALLADOS --- */
+    @keyframes shine {
+        0% { box-shadow: 0 0 10px gold; }
+        50% { box-shadow: 0 0 25px gold; }
+        100% { box-shadow: 0 0 10px gold; }
+    }
+
+    .top2 {
+        background: linear-gradient(135deg, #c0c0c0, #e6e6e6);
+        color: #000;
+        font-weight: bold;
+        box-shadow: 0 0 15px #c0c0c0;
+    }
+
+    .top3 {
+        background: linear-gradient(135deg, #cd7f32, #e8b48a);
+        color: #000;
+        font-weight: bold;
+        box-shadow: 0 0 15px #cd7f32;
+    }
+
+    /* PARTICIPANTES */
     .participante {
         max-width: 900px;
-        margin: 20px auto;
-        background: white;
+        margin: 25px auto;
+        background: rgba(0,0,0,0.55);
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        animation: fadeIn 1s ease-out;
     }
 
-    .participante h2 {
+    .participante h3 {
         margin-top: 0;
-        border-bottom: 2px solid #ddd;
+        font-size: 26px;
+        color: gold;
+        border-bottom: 2px solid rgba(255,255,255,0.3);
         padding-bottom: 5px;
+        text-shadow: 0 0 8px #000;
     }
 
     .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 15px;
         margin-top: 10px;
     }
 
     .box {
-        background: #fafafa;
-        padding: 10px;
-        border-radius: 6px;
-        border: 1px solid #ddd;
+        background: rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.2);
     }
 
     .titulo {
         font-weight: bold;
-        margin-bottom: 5px;
-        color: #444;
+        margin-bottom: 8px;
+        color: #ffe680;
+        text-shadow: 0 0 5px #000;
+    }
+
+    @media (max-width: 700px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 </head>
 
 <body>
 
-<h1>Clasificación General</h1>
+<header>
+    <h1>Porra del Mundial</h1>
+    <h2>Área de Verticales</h2>
 
-<div class="clasificacion" id="clasificacion"></div>
+    <div class="flags">
+        <img src="https://flagcdn.com/w40/es.png">
+        <img src="https://flagcdn.com/w40/fr.png">
+        <img src="https://flagcdn.com/w40/br.png">
+        <img src="https://flagcdn.com/w40/pt.png">
+        <img src="https://flagcdn.com/w40/ar.png">
+    </div>
+</header>
 
-<h1>Participantes</h1>
+<div class="clasificacion" id="clasificacion">
+    <div class="titulo-seccion">Clasificación General</div>
+</div>
 
 <div id="participantes"></div>
 
@@ -102,9 +218,7 @@ fetch("https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9
   .then(r => r.json())
   .then(data => {
 
-      /* -------------------------
-         CLASIFICACIÓN GENERAL
-      --------------------------*/
+      /* CLASIFICACIÓN */
       const lista = data.participantes;
       lista.sort((a, b) => b.TotalPuntos - a.TotalPuntos);
 
@@ -124,15 +238,13 @@ fetch("https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9
           `;
       });
 
-      /* -------------------------
-         PARTICIPANTES DETALLADOS
-      --------------------------*/
+      /* PARTICIPANTES DETALLADOS */
       const cont = document.getElementById("participantes");
 
       lista.forEach(p => {
           cont.innerHTML += `
               <div class="participante">
-                  <h2>${p.Participante} — ${p.TotalPuntos} puntos</h2>
+                  <h3>${p.Participante} — ${p.TotalPuntos} puntos</h3>
 
                   <div class="grid">
                       <div class="box">
