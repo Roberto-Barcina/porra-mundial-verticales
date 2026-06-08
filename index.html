@@ -3,8 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <title>Porra del Mundial – Verticales</title>
+<header>
+    <h1>Porra del Mundial</h1>
+    <h2>Área de Verticales</h2>
+
+    <!-- Trofeo 3D girando -->
+    <img class="trofeo" src="https://i.imgur.com/8qV7k0G.gif" alt="Trofeo Mundial">
+
+    <!-- Banderas dinámicas de todos los países -->
+    <div class="banderas">
+        <div class="scroll">
+            <img src="https://flagcdn.com/w40/es.png">
+            <img src="https://flagcdn.com/w40/fr.png">
+            <img src="https://flagcdn.com/w40/br.png">
+            <img src="https://flagcdn.com/w40/ar.png">
+            <img src="https://flagcdn.com/w40/pt.png">
+            <img src="https://flagcdn.com/w40/de.png">
+            <img src="https://flagcdn.com/w40/it.png">
+            <img src="https://flagcdn.com/w40/gb.png">
+            <img src="https://flagcdn.com/w40/mx.png">
+            <img src="https://flagcdn.com/w40/co.png">
+            <img src="https://flagcdn.com/w40/uy.png">
+            <img src="https://flagcdn.com/w40/jp.png">
+            <img src="https://flagcdn.com/w40/kr.png">
+            <img src="https://flagcdn.com/w40/za.png">
+            <img src="https://flagcdn.com/w40/au.png">
+            <img src="https://flagcdn.com/w40/nl.png">
+            <img src="https://flagcdn.com/w40/se.png">
+            <img src="https://flagcdn.com/w40/no.png">
+            <img src="https://flagcdn.com/w40/dk.png">
+            <img src="https://flagcdn.com/w40/pl.png">
+            <img src="https://flagcdn.com/w40/ch.png">
+            <img src="https://flagcdn.com/w40/ma.png">
+            <img src="https://flagcdn.com/w40/sn.png">
+            <img src="https://flagcdn.com/w40/eg.png">
+            <img src="https://flagcdn.com/w40/qa.png">
+        </div>
+    </div>
+</header>
 
 <style>
+/* Fondo animado estilo partículas */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://i.imgur.com/8YqGk5y.jpeg') center/cover no-repeat;
+    filter: brightness(0.4);
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://i.imgur.com/3ZQ3Z8U.png');
+    opacity: 0.25;
+    animation: particles 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes particles {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+}
+
+/* Trofeo 3D girando */
+.trofeo {
+    width: 120px;
+    margin: 20px auto 0;
+    animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* Cinta de banderas animadas */
+.banderas {
+    margin-top: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.banderas img {
+    width: 45px;
+    height: 30px;
+    margin: 0 6px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px #000;
+}
+
+.banderas .scroll {
+    display: inline-block;
+    animation: scrollFlags 20s linear infinite;
+}
+
+@keyframes scrollFlags {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
     body {
         font-family: 'Segoe UI', Arial, sans-serif;
         background: url('https://i.imgur.com/8YqGk5y.jpeg') center/cover fixed no-repeat;
