@@ -2,376 +2,387 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Porra del Mundial – Verticales</title>
-<header>
-    <h1>Porra del Mundial</h1>
-    <h2>Área de Verticales</h2>
-
-    <!-- Trofeo 3D girando -->
-    <img class="trofeo" src="https://i.imgur.com/8qV7k0G.gif" alt="Trofeo Mundial">
-
-    <!-- Banderas dinámicas de todos los países -->
-    <div class="banderas">
-        <div class="scroll">
-            <img src="https://flagcdn.com/w40/es.png">
-            <img src="https://flagcdn.com/w40/fr.png">
-            <img src="https://flagcdn.com/w40/br.png">
-            <img src="https://flagcdn.com/w40/ar.png">
-            <img src="https://flagcdn.com/w40/pt.png">
-            <img src="https://flagcdn.com/w40/de.png">
-            <img src="https://flagcdn.com/w40/it.png">
-            <img src="https://flagcdn.com/w40/gb.png">
-            <img src="https://flagcdn.com/w40/mx.png">
-            <img src="https://flagcdn.com/w40/co.png">
-            <img src="https://flagcdn.com/w40/uy.png">
-            <img src="https://flagcdn.com/w40/jp.png">
-            <img src="https://flagcdn.com/w40/kr.png">
-            <img src="https://flagcdn.com/w40/za.png">
-            <img src="https://flagcdn.com/w40/au.png">
-            <img src="https://flagcdn.com/w40/nl.png">
-            <img src="https://flagcdn.com/w40/se.png">
-            <img src="https://flagcdn.com/w40/no.png">
-            <img src="https://flagcdn.com/w40/dk.png">
-            <img src="https://flagcdn.com/w40/pl.png">
-            <img src="https://flagcdn.com/w40/ch.png">
-            <img src="https://flagcdn.com/w40/ma.png">
-            <img src="https://flagcdn.com/w40/sn.png">
-            <img src="https://flagcdn.com/w40/eg.png">
-            <img src="https://flagcdn.com/w40/qa.png">
-        </div>
-    </div>
-</header>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Porra Mundial de Verticales - NIVEL 4 LIVE</title>
 
 <style>
-/* Fondo animado estilo partículas */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('https://i.imgur.com/8YqGk5y.jpeg') center/cover no-repeat;
-    filter: brightness(0.4);
-    z-index: -2;
+
+:root{
+    --oro:#ffd700;
+    --plata:#c0c0c0;
+    --bronce:#cd7f32;
+    --fondo:rgba(0,0,0,0.78);
+    --verde:#00ff88;
+    --rojo:#ff4d4d;
+    --azul:#4da3ff;
 }
 
-body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('https://i.imgur.com/3ZQ3Z8U.png');
-    opacity: 0.25;
-    animation: particles 20s linear infinite;
-    z-index: -1;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-@keyframes particles {
-    from { background-position: 0 0; }
-    to { background-position: 0 1000px; }
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    color:white;
+
+    background:
+        linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),
+        url('https://images.unsplash.com/photo-1459865264687-c49fa049e84d');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 }
 
-/* Trofeo 3D girando */
-.trofeo {
-    width: 120px;
-    margin: 20px auto 0;
-    animation: spin 6s linear infinite;
+/* HEADER BROADCAST */
+
+header{
+    text-align:center;
+    padding:40px 20px 20px;
+    background:linear-gradient(135deg,rgba(0,0,0,.95),rgba(0,20,60,.95));
+    border-bottom:4px solid var(--oro);
 }
 
-@keyframes spin {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+h1{
+    font-size:3rem;
+    letter-spacing:2px;
 }
 
-/* Cinta de banderas animadas */
-.banderas {
-    margin-top: 25px;
-    overflow: hidden;
-    white-space: nowrap;
+.live{
+    display:inline-block;
+    margin-top:10px;
+    padding:6px 14px;
+    background:var(--rojo);
+    border-radius:20px;
+    font-weight:bold;
+    animation:blink 1s infinite;
 }
 
-.banderas img {
-    width: 45px;
-    height: 30px;
-    margin: 0 6px;
-    border-radius: 4px;
-    box-shadow: 0 0 6px #000;
+@keyframes blink{
+    0%,100%{opacity:1;}
+    50%{opacity:.2;}
 }
 
-.banderas .scroll {
-    display: inline-block;
-    animation: scrollFlags 20s linear infinite;
+/* CONTENEDOR */
+
+.container{
+    width:min(1200px,95%);
+    margin:auto;
 }
 
-@keyframes scrollFlags {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+/* RANKING PRINCIPAL */
+
+.board{
+    margin-top:20px;
+    background:var(--fondo);
+    padding:20px;
+    border-radius:18px;
+    backdrop-filter:blur(12px);
 }
 
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: url('https://i.imgur.com/8YqGk5y.jpeg') center/cover fixed no-repeat;
-        margin: 0;
-        padding: 0;
-        color: #fff;
-    }
+.title{
+    text-align:center;
+    font-size:2rem;
+    color:var(--oro);
+    margin-bottom:15px;
+}
 
-    /* CABECERA */
-    header {
-        text-align: center;
-        padding: 50px 20px;
-        background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,40,80,0.8));
-        border-bottom: 5px solid gold;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        position: relative;
-    }
+/* ROWS */
 
-    header::after {
-        content: "";
-        position: absolute;
-        bottom: -20px;
-        left: 0;
-        width: 100%;
-        height: 20px;
-        background: url('https://i.imgur.com/2YQzF3G.png') repeat-x;
-        opacity: 0.9;
-    }
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:16px;
+    margin-bottom:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+    transition:.3s;
+    font-size:1.2rem;
+}
 
-    header h1 {
-        font-size: 48px;
-        margin: 0;
-        font-weight: 900;
-        text-shadow: 0 0 15px #000;
-        letter-spacing: 2px;
-    }
+.row:hover{
+    transform:scale(1.01);
+}
 
-    header h2 {
-        margin-top: 10px;
-        font-size: 22px;
-        opacity: 0.9;
-        text-shadow: 0 0 8px #000;
-    }
+.first{background:linear-gradient(135deg,#ffd700,#fff6ba); color:black; font-weight:bold;}
+.second{background:linear-gradient(135deg,#c0c0c0,#eee); color:black; font-weight:bold;}
+.third{background:linear-gradient(135deg,#cd7f32,#f0c39a); color:black; font-weight:bold;}
 
-    /* BANDERAS */
-    .flags {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        animation: wave 3s infinite ease-in-out;
-    }
+/* MOVIMIENTO TIPO REPLAY */
 
-    .flags img {
-        width: 45px;
-        height: 30px;
-        border-radius: 4px;
-        box-shadow: 0 0 10px #000;
-    }
+.up{
+    border-left:6px solid var(--verde);
+    animation:upMove .6s;
+}
 
-    @keyframes wave {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
-        100% { transform: translateY(0); }
-    }
+.down{
+    border-left:6px solid var(--rojo);
+    animation:downMove .6s;
+}
 
-    /* CLASIFICACIÓN */
-    .clasificacion {
-        max-width: 900px;
-        margin: 40px auto;
-        background: rgba(0,0,0,0.55);
-        padding: 25px;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 25px rgba(0,0,0,0.5);
-        animation: fadeIn 1s ease-out;
-    }
+@keyframes upMove{
+    0%{transform:translateY(10px); filter:brightness(1.5);}
+    100%{transform:translateY(0);}
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes downMove{
+    0%{transform:translateY(-10px); filter:brightness(1.5);}
+    100%{transform:translateY(0);}
+}
 
-    .titulo-seccion {
-        font-size: 30px;
-        margin-bottom: 20px;
-        font-weight: bold;
-        text-align: center;
-        color: gold;
-        text-shadow: 0 0 10px #000;
-    }
+/* CARDS */
 
-    .item {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px;
-        margin-bottom: 12px;
-        border-radius: 12px;
-        font-size: 22px;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(5px);
-        transition: transform 0.2s;
-    }
+.card{
+    margin:20px 0;
+    background:var(--fondo);
+    padding:18px;
+    border-radius:14px;
+}
 
-    .item:hover {
-        transform: scale(1.03);
-    }
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
 
-    /* PODIO */
-    .top1 {
-        background: linear-gradient(135deg, #ffd700, #fff3a0);
-        color: #000;
-        font-weight: bold;
-        box-shadow: 0 0 20px #ffd700;
-        animation: shine 2s infinite linear;
-    }
+.box{
+    background:rgba(255,255,255,.08);
+    padding:12px;
+    border-radius:10px;
+}
 
-    @keyframes shine {
-        0% { box-shadow: 0 0 10px gold; }
-        50% { box-shadow: 0 0 25px gold; }
-        100% { box-shadow: 0 0 10px gold; }
-    }
+/* CHART */
 
-    .top2 {
-        background: linear-gradient(135deg, #c0c0c0, #e6e6e6);
-        color: #000;
-        font-weight: bold;
-        box-shadow: 0 0 15px #c0c0c0;
-    }
+canvas{
+    width:100%;
+    height:100px;
+    margin-top:10px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
 
-    .top3 {
-        background: linear-gradient(135deg, #cd7f32, #e8b48a);
-        color: #000;
-        font-weight: bold;
-        box-shadow: 0 0 15px #cd7f32;
-    }
-
-    /* PARTICIPANTES */
-    .participante {
-        max-width: 900px;
-        margin: 25px auto;
-        background: rgba(0,0,0,0.55);
-        padding: 20px;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 25px rgba(0,0,0,0.5);
-        animation: fadeIn 1s ease-out;
-    }
-
-    .participante h3 {
-        margin-top: 0;
-        font-size: 26px;
-        color: gold;
-        border-bottom: 2px solid rgba(255,255,255,0.3);
-        padding-bottom: 5px;
-        text-shadow: 0 0 8px #000;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-top: 10px;
-    }
-
-    .box {
-        background: rgba(255,255,255,0.1);
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .titulo {
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: #ffe680;
-        text-shadow: 0 0 5px #000;
-    }
-
-    @media (max-width: 700px) {
-        .grid {
-            grid-template-columns: 1fr;
-        }
-    }
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Porra del Mundial</h1>
-    <h2>Área de Verticales</h2>
-
-    <div class="flags">
-        <img src="https://flagcdn.com/w40/es.png">
-        <img src="https://flagcdn.com/w40/fr.png">
-        <img src="https://flagcdn.com/w40/br.png">
-        <img src="https://flagcdn.com/w40/pt.png">
-        <img src="https://flagcdn.com/w40/ar.png">
-    </div>
+    <h1>🏆 PORRA MUNDIAL DE VERTICALES</h1>
+    <div class="live">🔴 LIVE BROADCAST</div>
 </header>
 
-<div class="clasificacion" id="clasificacion">
-    <div class="titulo-seccion">Clasificación General</div>
+<div class="container">
+
+    <div class="board">
+        <div class="title">📊 Clasificación en Directo</div>
+        <div id="board"></div>
+    </div>
+
+    <div id="cards"></div>
+
 </div>
 
-<div id="participantes"></div>
-
 <script>
-fetch("https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9QdREFjDLo-hPR1e1rYia2EKen1aaJl_mJvJA/exec")
-  .then(r => r.json())
-  .then(data => {
 
-      /* CLASIFICACIÓN */
-      const lista = data.participantes;
-      lista.sort((a, b) => b.TotalPuntos - a.TotalPuntos);
+const URL =
+"https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9QdREFjDLo-hPR1e1rYia2EKen1aaJl_mJvJA/exec";
 
-      const clasif = document.getElementById("clasificacion");
+/* ESTADO GLOBAL */
+let state = JSON.parse(localStorage.getItem("state") || "{}");
+let history = JSON.parse(localStorage.getItem("history") || "{}");
+let last = null;
 
-      lista.forEach((p, i) => {
-          let clase = "";
-          if (i === 0) clase = "top1";
-          if (i === 1) clase = "top2";
-          if (i === 2) clase = "top3";
+/* SAVE */
+function save(){
+    localStorage.setItem("state", JSON.stringify(state));
+    localStorage.setItem("history", JSON.stringify(history));
+}
 
-          clasif.innerHTML += `
-              <div class="item ${clase}">
-                  <div>${i + 1}. ${p.Participante}</div>
-                  <div><strong>${p.TotalPuntos}</strong> pts</div>
-              </div>
-          `;
-      });
+/* HISTORIAL */
+function pushHistory(name, value){
 
-      /* PARTICIPANTES DETALLADOS */
-      const cont = document.getElementById("participantes");
+    if(!history[name]) history[name] = [];
 
-      lista.forEach(p => {
-          cont.innerHTML += `
-              <div class="participante">
-                  <h3>${p.Participante} — ${p.TotalPuntos} puntos</h3>
+    history[name].push(value);
 
-                  <div class="grid">
-                      <div class="box">
-                          <div class="titulo">Equipos</div>
-                          ${p["Equipo 1"]}<br>
-                          ${p["Equipo 2"]}<br>
-                          ${p["Equipo 3"]}<br>
-                          ${p["Equipo 4"]}<br>
-                          ${p["Equipo 5"]}<br>
-                      </div>
+    if(history[name].length > 25){
+        history[name].shift();
+    }
+}
 
-                      <div class="box">
-                          <div class="titulo">Jugadores</div>
-                          ${p["Jugador 1"]}<br>
-                          ${p["Jugador 2"]}<br>
-                          ${p["Jugador 3"]}<br>
-                          ${p["Jugador 4"]}<br>
-                          ${p["Jugador 5"]}<br>
-                      </div>
-                  </div>
-              </div>
-          `;
-      });
+/* CLASIFICACION */
 
-  });
+function rankClass(i){
+    if(i===0) return "row first";
+    if(i===1) return "row second";
+    if(i===2) return "row third";
+    return "row";
+}
+
+/* MOVIMIENTO INTELIGENTE */
+
+function motion(p){
+
+    const old = state[p.Participante];
+
+    if(old === undefined) return "";
+
+    if(p.TotalPuntos > old) return "up";
+    if(p.TotalPuntos < old) return "down";
+
+    return "";
+}
+
+/* RENDER BOARD */
+
+function renderBoard(data){
+
+    const el = document.getElementById("board");
+    el.innerHTML="";
+
+    data.forEach((p,i)=>{
+
+        const div = document.createElement("div");
+
+        div.className = rankClass(i) + " " + motion(p);
+
+        div.innerHTML = `
+            <div>🏅 ${i+1}. ${p.Participante}</div>
+            <div><b>${p.TotalPuntos}</b> pts</div>
+        `;
+
+        el.appendChild(div);
+    });
+}
+
+/* GRAFICO */
+
+function draw(canvas, points){
+
+    const ctx = canvas.getContext("2d");
+
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0,0,w,h);
+
+    if(points.length < 2) return;
+
+    const max = Math.max(...points);
+    const min = Math.min(...points);
+    const range = max - min || 1;
+
+    ctx.strokeStyle = "#4da3ff";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+
+    points.forEach((v,i)=>{
+
+        const x = (i/(points.length-1))*w;
+        const y = h - ((v-min)/range)*h;
+
+        if(i===0) ctx.moveTo(x,y);
+        else ctx.lineTo(x,y);
+
+    });
+
+    ctx.stroke();
+}
+
+/* CARDS */
+
+function renderCards(data){
+
+    const el = document.getElementById("cards");
+    el.innerHTML="";
+
+    data.forEach(p=>{
+
+        pushHistory(p.Participante, p.TotalPuntos);
+
+        const div = document.createElement("div");
+        div.className="card";
+
+        div.innerHTML=`
+            <h3>${p.Participante} — ${p.TotalPuntos} pts</h3>
+
+            <div class="grid">
+
+                <div class="box">
+                    <h4>⚽ Equipos</h4>
+                    <div>${p["Equipo 1"]||""}</div>
+                    <div>${p["Equipo 2"]||""}</div>
+                    <div>${p["Equipo 3"]||""}</div>
+                    <div>${p["Equipo 4"]||""}</div>
+                    <div>${p["Equipo 5"]||""}</div>
+                </div>
+
+                <div class="box">
+                    <h4>⭐ Jugadores</h4>
+                    <div>${p["Jugador 1"]||""}</div>
+                    <div>${p["Jugador 2"]||""}</div>
+                    <div>${p["Jugador 3"]||""}</div>
+                    <div>${p["Jugador 4"]||""}</div>
+                    <div>${p["Jugador 5"]||""}</div>
+                </div>
+
+            </div>
+
+            <canvas></canvas>
+        `;
+
+        el.appendChild(div);
+
+        const canvas = div.querySelector("canvas");
+        canvas.width = canvas.offsetWidth;
+        canvas.height = 100;
+
+        draw(canvas, history[p.Participante] || []);
+    });
+}
+
+/* DETECTOR CAMBIOS REAL */
+
+function changed(data){
+
+    if(!last) return true;
+
+    return JSON.stringify(data) !== JSON.stringify(last);
+}
+
+/* LOAD ENGINE */
+
+async function load(){
+
+    const r = await fetch(URL);
+    const d = await r.json();
+
+    const data = d.participantes;
+
+    data.sort((a,b)=>b.TotalPuntos-a.TotalPuntos);
+
+    if(!changed(data)) return;
+
+    renderBoard(data);
+    renderCards(data);
+
+    data.forEach(p=>{
+        state[p.Participante] = p.TotalPuntos;
+    });
+
+    last = JSON.parse(JSON.stringify(data));
+
+    save();
+}
+
+/* LOOP LIVE */
+
+load();
+setInterval(load,10000);
+
 </script>
 
 </body>
