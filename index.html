@@ -185,6 +185,144 @@ canvas{
 </div>
 
 <script>
+/* ==========================================
+   RANKING POR EQUIPOS Y JUGADORES
+========================================== */
+
+function crearRankingSecundario(participantes){
+
+    const contenedorPrincipal =
+        document.querySelector(".clasificacion");
+
+    let html = `
+
+    <div style="
+        margin-top:30px;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:20px;
+    ">
+
+        <div style="
+            background:rgba(255,255,255,.08);
+            padding:15px;
+            border-radius:12px;
+        ">
+            <h3 style="
+                color:#ffd700;
+                margin-bottom:15px;
+                text-align:center;
+            ">
+                ⚽ Ranking Equipos
+            </h3>
+
+            <div id="rankingEquipos"></div>
+        </div>
+
+        <div style="
+            background:rgba(255,255,255,.08);
+            padding:15px;
+            border-radius:12px;
+        ">
+            <h3 style="
+                color:#ffd700;
+                margin-bottom:15px;
+                text-align:center;
+            ">
+                ⭐ Ranking Jugadores
+            </h3>
+
+            <div id="rankingJugadores"></div>
+        </div>
+
+    </div>
+    `;
+
+    const viejo =
+        document.getElementById("rankingSecundario");
+
+    if(viejo) viejo.remove();
+
+    const bloque =
+        document.createElement("div");
+
+    bloque.id = "rankingSecundario";
+    bloque.innerHTML = html;
+
+    contenedorPrincipal.appendChild(bloque);
+
+    /* ORDENAR POR EQUIPOS */
+
+    const rankingEquipos =
+        [...participantes]
+        .sort((a,b)=>
+            Number(b.PuntosEquipos || 0)
+            -
+            Number(a.PuntosEquipos || 0)
+        );
+
+    let htmlEquipos = "";
+
+    rankingEquipos.forEach((p,i)=>{
+
+        htmlEquipos += `
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding:8px;
+                border-bottom:1px solid rgba(255,255,255,.1);
+            ">
+                <span>
+                    ${i+1}. ${p.Participante}
+                </span>
+
+                <strong>
+                    ${p.PuntosEquipos || 0}
+                </strong>
+            </div>
+        `;
+    });
+
+    document.getElementById(
+        "rankingEquipos"
+    ).innerHTML = htmlEquipos;
+
+    /* ORDENAR POR JUGADORES */
+
+    const rankingJugadores =
+        [...participantes]
+        .sort((a,b)=>
+            Number(b.PuntosJugadores || 0)
+            -
+            Number(a.PuntosJugadores || 0)
+        );
+
+    let htmlJugadores = "";
+
+    rankingJugadores.forEach((p,i)=>{
+
+        htmlJugadores += `
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding:8px;
+                border-bottom:1px solid rgba(255,255,255,.1);
+            ">
+                <span>
+                    ${i+1}. ${p.Participante}
+                </span>
+
+                <strong>
+                    ${p.PuntosJugadores || 0}
+                </strong>
+            </div>
+        `;
+    });
+
+    document.getElementById(
+        "rankingJugadores"
+    ).innerHTML = htmlJugadores;
+}
 
 const URL =
 "https://script.google.com/macros/s/AKfycbwfWIbX_ye0snlmrGVOl_pJAl6jIkdxN9QdREFjDLo-hPR1e1rYia2EKen1aaJl_mJvJA/exec";
@@ -368,6 +506,7 @@ async function load(){
 
     renderBoard(data);
     renderCards(data);
+	crearRankingSecundario(data);
 
     data.forEach(p=>{
         state[p.Participante] = p.TotalPuntos;
