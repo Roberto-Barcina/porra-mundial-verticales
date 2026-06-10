@@ -193,76 +193,45 @@ canvas{
 function crearRankingGlobal(data){
 
     const contenedor = document.querySelector(".clasificacion");
-
     if(!contenedor) return;
 
-    // acumuladores
     const equipos = {};
     const jugadores = {};
 
     data.forEach(p=>{
 
-        const puntosEquipos = Number(p.TotalPuntos || 0);
-        const puntosJugadores = Number(p.TotalPuntos || 0);
-
-        // EQUIPOS
         for(let i=1;i<=5;i++){
-            const eq = p["Equipo "+i];
-            if(!eq) continue;
+            const equipo = p["Equipo "+i];
+            const puntos = Number(p["Puntos Equipo "+i] || 0);
 
-            if(!equipos[eq]){
-                equipos[eq] = 0;
+            if(equipo){
+                equipos[equipo] = (equipos[equipo] || 0) + puntos;
             }
-            equipos[eq] += puntosEquipos;
         }
 
-        // JUGADORES
         for(let i=1;i<=5;i++){
-            const ju = p["Jugador "+i];
-            if(!ju) continue;
+            const jugador = p["Jugador "+i];
+            const puntos = Number(p["Puntos Jugador "+i] || 0);
 
-            if(!jugadores[ju]){
-                jugadores[ju] = 0;
+            if(jugador){
+                jugadores[jugador] = (jugadores[jugador] || 0) + puntos;
             }
-            jugadores[ju] += puntosJugadores;
         }
     });
 
-    // ordenar equipos
-    const rankingEquipos = Object.entries(equipos)
-        .sort((a,b)=>b[1]-a[1]);
-
-    // ordenar jugadores
-    const rankingJugadores = Object.entries(jugadores)
-        .sort((a,b)=>b[1]-a[1]);
-
     contenedor.innerHTML = `
-    <div style="margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-
-        <div style="background:rgba(255,255,255,.08);padding:15px;border-radius:12px;">
-            <h3 style="color:#ffd700;text-align:center;">⚽ Equipos más puntuados</h3>
-            <div>
-                ${rankingEquipos.map((e,i)=>
-                    `<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid rgba(255,255,255,.1)">
-                        <span>${i+1}. ${e[0]}</span>
-                        <b>${e[1]}</b>
-                    </div>`
-                ).join("")}
-            </div>
-        </div>
-
-        <div style="background:rgba(255,255,255,.08);padding:15px;border-radius:12px;">
-            <h3 style="color:#ffd700;text-align:center;">⭐ Jugadores más puntuados</h3>
-            <div>
-                ${rankingJugadores.map((j,i)=>
-                    `<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid rgba(255,255,255,.1)">
-                        <span>${i+1}. ${j[0]}</span>
-                        <b>${j[1]}</b>
-                    </div>`
-                ).join("")}
-            </div>
-        </div>
-
+    <div style="
+        margin-top:30px;
+        background:rgba(255,255,255,.08);
+        padding:15px;
+        border-radius:12px;
+    ">
+        <h3 style="color:#ffd700;text-align:center;">
+            📊 Clasificación general equipos y jugadores (procesado)
+        </h3>
+        <p style="text-align:center;opacity:0.7;margin-top:10px;">
+            (Este bloque ya no muestra rankings separados)
+        </p>
     </div>`;
 }
 
