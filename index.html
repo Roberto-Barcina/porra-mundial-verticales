@@ -181,6 +181,7 @@ canvas{
     </div>
 
     <div id="cards"></div>
+	<div class="clasificacion"></div>
 
 </div>
 
@@ -189,139 +190,80 @@ canvas{
    RANKING POR EQUIPOS Y JUGADORES
 ========================================== */
 
-function crearRankingSecundario(participantes){
+function crearRankingGlobal(data){
 
-    const contenedorPrincipal =
-        document.querySelector(".clasificacion");
+    const contenedor = document.querySelector(".clasificacion");
 
-    let html = `
+    if(!contenedor) return;
 
-    <div style="
-        margin-top:30px;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:20px;
-    ">
+    // acumuladores
+    const equipos = {};
+    const jugadores = {};
 
-        <div style="
-            background:rgba(255,255,255,.08);
-            padding:15px;
-            border-radius:12px;
-        ">
-            <h3 style="
-                color:#ffd700;
-                margin-bottom:15px;
-                text-align:center;
-            ">
-                ⚽ Ranking Equipos
-            </h3>
+    data.forEach(p=>{
 
-            <div id="rankingEquipos"></div>
-        </div>
+        const puntosEquipos = Number(p.TotalPuntos || 0);
+        const puntosJugadores = Number(p.TotalPuntos || 0);
 
-        <div style="
-            background:rgba(255,255,255,.08);
-            padding:15px;
-            border-radius:12px;
-        ">
-            <h3 style="
-                color:#ffd700;
-                margin-bottom:15px;
-                text-align:center;
-            ">
-                ⭐ Ranking Jugadores
-            </h3>
+        // EQUIPOS
+        for(let i=1;i<=5;i++){
+            const eq = p["Equipo "+i];
+            if(!eq) continue;
 
-            <div id="rankingJugadores"></div>
-        </div>
+            if(!equipos[eq]){
+                equipos[eq] = 0;
+            }
+            equipos[eq] += puntosEquipos;
+        }
 
-    </div>
-    `;
+        // JUGADORES
+        for(let i=1;i<=5;i++){
+            const ju = p["Jugador "+i];
+            if(!ju) continue;
 
-    const viejo =
-        document.getElementById("rankingSecundario");
-
-    if(viejo) viejo.remove();
-
-    const bloque =
-        document.createElement("div");
-
-    bloque.id = "rankingSecundario";
-    bloque.innerHTML = html;
-
-    contenedorPrincipal.appendChild(bloque);
-
-    /* ORDENAR POR EQUIPOS */
-
-    const rankingEquipos =
-        [...participantes]
-        .sort((a,b)=>
-            Number(b.PuntosEquipos || 0)
-            -
-            Number(a.PuntosEquipos || 0)
-        );
-
-    let htmlEquipos = "";
-
-    rankingEquipos.forEach((p,i)=>{
-
-        htmlEquipos += `
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding:8px;
-                border-bottom:1px solid rgba(255,255,255,.1);
-            ">
-                <span>
-                    ${i+1}. ${p.Participante}
-                </span>
-
-                <strong>
-                    ${p.PuntosEquipos || 0}
-                </strong>
-            </div>
-        `;
+            if(!jugadores[ju]){
+                jugadores[ju] = 0;
+            }
+            jugadores[ju] += puntosJugadores;
+        }
     });
 
-    document.getElementById(
-        "rankingEquipos"
-    ).innerHTML = htmlEquipos;
+    // ordenar equipos
+    const rankingEquipos = Object.entries(equipos)
+        .sort((a,b)=>b[1]-a[1]);
 
-    /* ORDENAR POR JUGADORES */
+    // ordenar jugadores
+    const rankingJugadores = Object.entries(jugadores)
+        .sort((a,b)=>b[1]-a[1]);
 
-    const rankingJugadores =
-        [...participantes]
-        .sort((a,b)=>
-            Number(b.PuntosJugadores || 0)
-            -
-            Number(a.PuntosJugadores || 0)
-        );
+    contenedor.innerHTML = `
+    <div style="margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
 
-    let htmlJugadores = "";
-
-    rankingJugadores.forEach((p,i)=>{
-
-        htmlJugadores += `
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding:8px;
-                border-bottom:1px solid rgba(255,255,255,.1);
-            ">
-                <span>
-                    ${i+1}. ${p.Participante}
-                </span>
-
-                <strong>
-                    ${p.PuntosJugadores || 0}
-                </strong>
+        <div style="background:rgba(255,255,255,.08);padding:15px;border-radius:12px;">
+            <h3 style="color:#ffd700;text-align:center;">⚽ Equipos más puntuados</h3>
+            <div>
+                ${rankingEquipos.map((e,i)=>
+                    `<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid rgba(255,255,255,.1)">
+                        <span>${i+1}. ${e[0]}</span>
+                        <b>${e[1]}</b>
+                    </div>`
+                ).join("")}
             </div>
-        `;
-    });
+        </div>
 
-    document.getElementById(
-        "rankingJugadores"
-    ).innerHTML = htmlJugadores;
+        <div style="background:rgba(255,255,255,.08);padding:15px;border-radius:12px;">
+            <h3 style="color:#ffd700;text-align:center;">⭐ Jugadores más puntuados</h3>
+            <div>
+                ${rankingJugadores.map((j,i)=>
+                    `<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid rgba(255,255,255,.1)">
+                        <span>${i+1}. ${j[0]}</span>
+                        <b>${j[1]}</b>
+                    </div>`
+                ).join("")}
+            </div>
+        </div>
+
+    </div>`;
 }
 
 const URL =
@@ -506,7 +448,7 @@ async function load(){
 
     renderBoard(data);
     renderCards(data);
-	crearRankingSecundario(data);
+	crearRankingGlobal(data);
 
     data.forEach(p=>{
         state[p.Participante] = p.TotalPuntos;
